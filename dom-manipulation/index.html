@@ -1,45 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dynamic Quote Generator</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-    }
-    #quoteDisplay {
-      margin: 20px 0;
-      padding: 10px;
-      border: 1px solid #ccc;
-      background-color: #f9f9f9;
-    }
-    #newQuote {
-      padding: 10px 20px;
-      cursor: pointer;
-    }
-    #addQuoteForm {
-      margin-top: 20px;
-    }
-    input, button {
-      margin: 5px;
-      padding: 10px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Quote Generator</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin: 20px; }
+        #quoteDisplay { margin: 20px; font-size: 1.5em; }
+        input, button { margin: 5px; padding: 10px; }
+    </style>
 </head>
 <body>
-  <h1>Dynamic Quote Generator</h1>
-  <div id="quoteDisplay">Click the button to see a quote!</div>
-  <button id="newQuote">Show New Quote</button>
-
-  <div id="addQuoteForm">
-    <h2>Add a New Quote</h2>
-    <input id="newQuoteText" type="text" placeholder="Enter a new quote" />
-    <input id="newQuoteCategory" type="text" placeholder="Enter quote category" />
-    <button onclick="addQuote()">Add Quote</button>
-  </div>
-
-  <script src="script.js"></script>
+    <h1>Dynamic Quote Generator</h1>
+    <div id="quoteDisplay"></div>
+    <button id="newQuote">Show New Quote</button>
+    
+    <div>
+        <input id="newQuoteText" type="text" placeholder="Enter a new quote" />
+        <input id="newQuoteCategory" type="text" placeholder="Enter quote category" />
+        <button id="addQuoteButton">Add Quote</button>
+    </div>
+    
+    <div>
+        <button id="exportQuotes">Export Quotes</button>
+        <input type="file" id="importFile" accept=".json" />
+    </div>
+    
+    <script src="script.js"></script>
 </body>
 </html>
