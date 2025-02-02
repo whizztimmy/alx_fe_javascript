@@ -1,35 +1,50 @@
-// Array of quote objects
-let quotes = [
-    { text: "The only limit to our realization of tomorrow is our doubts of today.", category: "Inspiration" },
-    { text: "Do what you can, with what you have, where you are.", category: "Motivation" },
-    { text: "The best way to predict the future is to invent it.", category: "Innovation" }
-  ];
-  
-  // Function to display a random quote
-  function showRandomQuote() {
-    const quoteDisplay = document.getElementById('quoteDisplay');
-    const randomIndex = Math.floor(Math.random() * quotes.length);
-    const randomQuote = quotes[randomIndex];
-    quoteDisplay.innerHTML = `<p>"${randomQuote.text}"</p><p><em>— ${randomQuote.category}</em></p>`;
-  }
-  
-  // Function to add a new quote
-  function addQuote() {
-    const newQuoteText = document.getElementById('newQuoteText').value;
-    const newQuoteCategory = document.getElementById('newQuoteCategory').value;
-  
-    if (newQuoteText && newQuoteCategory) {
-      quotes.push({ text: newQuoteText, category: newQuoteCategory });
-      document.getElementById('newQuoteText').value = '';
-      document.getElementById('newQuoteCategory').value = '';
-      showRandomQuote(); // Optionally show the newly added quote
-    } else {
-      alert('Please fill in both the quote and category fields.');
+document.addEventListener("DOMContentLoaded", () => {
+    const quotes = [
+        { text: "The only limit to our realization of tomorrow is our doubts of today.", category: "Motivation" },
+        { text: "In the middle of every difficulty lies opportunity.", category: "Inspiration" },
+        { text: "Do what you can, with what you have, where you are.", category: "Wisdom" }
+    ];
+
+    const quoteDisplay = document.getElementById("quoteDisplay");
+    const newQuoteButton = document.getElementById("newQuote");
+
+    function showRandomQuote() {
+        if (quotes.length === 0) {
+            quoteDisplay.innerHTML = "No quotes available.";
+            return;
+        }
+        const randomIndex = Math.floor(Math.random() * quotes.length);
+        const quote = quotes[randomIndex];
+        quoteDisplay.innerHTML = `<p>"${quote.text}" - <em>${quote.category}</em></p>`;
     }
-  }
-  
-  // Event listener for the "Show New Quote" button
-  document.getElementById('newQuote').addEventListener('click', showRandomQuote);
-  
-  // Initial quote display
-  showRandomQuote();
+
+    function createAddQuoteForm() {
+        const formContainer = document.createElement("div");
+        formContainer.innerHTML = `
+            <input id="newQuoteText" type="text" placeholder="Enter a new quote" />
+            <input id="newQuoteCategory" type="text" placeholder="Enter quote category" />
+            <button id="addQuoteButton">Add Quote</button>
+        `;
+        document.body.appendChild(formContainer);
+
+        document.getElementById("addQuoteButton").addEventListener("click", addQuote);
+    }
+
+    function addQuote() {
+        const newQuoteText = document.getElementById("newQuoteText").value.trim();
+        const newQuoteCategory = document.getElementById("newQuoteCategory").value.trim();
+
+        if (newQuoteText === "" || newQuoteCategory === "") {
+            alert("Please enter both a quote and a category.");
+            return;
+        }
+
+        quotes.push({ text: newQuoteText, category: newQuoteCategory });
+        document.getElementById("newQuoteText").value = "";
+        document.getElementById("newQuoteCategory").value = "";
+    }
+
+    newQuoteButton.addEventListener("click", showRandomQuote);
+    createAddQuoteForm();
+    showRandomQuote();
+});
