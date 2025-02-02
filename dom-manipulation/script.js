@@ -56,8 +56,8 @@ let quotes = [
     localStorage.setItem('quotes', JSON.stringify(allQuotes));
     quotes = allQuotes; // Update the quotes array in memory
   
-    // Optionally, show a notification of the update
-    displayUpdateNotification('Quotes synced with server!');
+    // Show a notification that quotes are synced
+    displayUpdateNotification("Quotes synced with server!");
   }
   
   // Periodically check for new quotes from the server
@@ -79,7 +79,7 @@ let quotes = [
     // Post the new quote to the server
     const postedQuote = await postQuoteToServer(newQuote);
     if (postedQuote) {
-      // Optionally, update the local quotes with the server's version of the quote
+      // Show a notification that the new quote was added and synced
       displayUpdateNotification('New quote added and synced with server!');
     }
   }
