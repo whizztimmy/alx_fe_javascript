@@ -57,7 +57,7 @@ let quotes = [
     quotes = allQuotes; // Update the quotes array in memory
   
     // Optionally, show a notification of the update
-    displayUpdateNotification('Quotes synced successfully!');
+    displayUpdateNotification('Quotes synced with server!');
   }
   
   // Periodically check for new quotes from the server
