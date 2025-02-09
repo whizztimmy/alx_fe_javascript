@@ -1,8 +1,26 @@
-const quotes = JSON.parse(localStorage.getItem("quotes")) || [
-    { text: "The only limit to our realization of tomorrow is our doubts of today.", category: "Motivation" },
-    { text: "In the middle of every difficulty lies opportunity.", category: "Inspiration" },
-    { text: "Do what you can, with what you have, where you are.", category: "Wisdom" }
-];
+const quotes = JSON.parse(localStorage.getItem("quotes")) || [];
+
+// Function to fetch quotes from a simulated server
+async function fetchQuotesFromServer() {
+    try {
+        const response = await fetch("https://jsonplaceholder.typicode.com/posts?_limit=5");
+        const serverQuotes = await response.json();
+        const formattedQuotes = serverQuotes.map(q => ({ text: q.title, category: "General" }));
+        mergeQuotes(formattedQuotes);
+    } catch (error) {
+        console.error("Error fetching quotes from server:", error);
+    }
+}
+
+// Function to merge server quotes with local quotes and handle conflicts
+function mergeQuotes(serverQuotes) {
+    const localQuotes = JSON.parse(localStorage.getItem("quotes")) || [];
+    const mergedQuotes = [...localQuotes, ...serverQuotes];
+    localStorage.setItem("quotes", JSON.stringify(mergedQuotes));
+    quotes.length = 0;
+    quotes.push(...mergedQuotes);
+    saveQuotes();
+}
 
 // Function to save quotes to local storage
 function saveQuotes() {
@@ -53,6 +71,7 @@ function showRandomQuote() {
 document.getElementById("newQuote").addEventListener("click", showRandomQuote);
 
 document.addEventListener("DOMContentLoaded", () => {
+    fetchQuotesFromServer();
     populateCategories();
     filterQuotes();
 });
@@ -109,8 +128,7 @@ function importFromJsonFile(event) {
         try {
             const importedQuotes = JSON.parse(event.target.result);
             if (Array.isArray(importedQuotes)) {
-                quotes.push(...importedQuotes);
-                saveQuotes();
+                mergeQuotes(importedQuotes);
                 alert("Quotes imported successfully!");
                 filterQuotes();
             } else {
