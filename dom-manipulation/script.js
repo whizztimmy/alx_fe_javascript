@@ -149,5 +149,4 @@ let quotes = [
       alert('Quotes imported successfully!');
     };
     fileReader.readAsText(event.target.files[0]);
-  }
-  
+  }  
