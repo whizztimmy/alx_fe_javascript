@@ -28,3 +28,17 @@ function addQuote() {
         alert("Please enter both a quote and a category.");
     }
 }
+
+// Function to create and add quote input form dynamically
+function createAddQuoteForm() {
+    const formContainer = document.createElement("div");
+    formContainer.innerHTML = `
+        <input id="newQuoteText" type="text" placeholder="Enter a new quote" />
+        <input id="newQuoteCategory" type="text" placeholder="Enter quote category" />
+        <button onclick="addQuote()">Add Quote</button>
+    `;
+    document.body.appendChild(formContainer);
+}
+
+// Call function to create form on page load
+createAddQuoteForm();
