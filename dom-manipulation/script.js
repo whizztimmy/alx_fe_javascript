@@ -39,6 +39,17 @@ function filterQuotes() {
     });
 }
 
+// Function to show a random quote
+function showRandomQuote() {
+    if (quotes.length > 0) {
+        const randomIndex = Math.floor(Math.random() * quotes.length);
+        const quote = quotes[randomIndex];
+        alert(`Random Quote: "${quote.text}" - ${quote.category}`);
+    } else {
+        alert("No quotes available.");
+    }
+}
+
 document.getElementById("newQuote").addEventListener("click", showRandomQuote);
 
 document.addEventListener("DOMContentLoaded", () => {
